@@ -14,5 +14,5 @@ def get_db():
 
 @router.get("/")
 def list_users(db: Session = Depends(get_db)):
-    result = db.execute(text("SELECT id, email, full_name FROM users")).fetchall()
-    return [dict(row) for row in result]
+    result = db.execute(text("SELECT id, email, full_name FROM users"))
+    return result.mappings().all()
